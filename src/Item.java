@@ -9,6 +9,7 @@ public class Item {
     private int minimumStockLevel;
 
     public Item(String name, String category, String description, BigDecimal unitPrice, int quantityInStock, int minimumStockLevel) {
+        // initialize the fields
         this.name = name;
         this.category = category;
         this.description = description;
@@ -17,6 +18,7 @@ public class Item {
         this.minimumStockLevel = minimumStockLevel;
     }
 
+    // getter methods for retrieving the values of the item's fields
     public String getName() {
         return name;
     }

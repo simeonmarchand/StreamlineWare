@@ -10,6 +10,7 @@ public class ItemDAO {
     public boolean addItem(Connection connection, Item item) {
         String query = "INSERT INTO items (name, category, description, unit_price, quantity_in_stock, minimum_stock_level) VALUES (?, ?, ?, ?, ?, ?)";
         try (PreparedStatement statement = connection.prepareStatement(query)) {
+            // set the parameters in the prepared statement
             statement.setString(1, item.getName());
             statement.setString(2, item.getCategory());
             statement.setString(3, item.getDescription());
@@ -17,11 +18,12 @@ public class ItemDAO {
             statement.setInt(5, item.getQuantityInStock());
             statement.setInt(6, item.getMinimumStockLevel());
 
+            //execute the query and check if it was successful
             int rowsInserted = statement.executeUpdate();
-            return rowsInserted > 0;
+            return rowsInserted > 0; // returns true if at least one row was inserted
         } catch (SQLException e) {
             e.printStackTrace();
-            return false;
+            return false; // return false if an exception was caught
         }
     }
 
