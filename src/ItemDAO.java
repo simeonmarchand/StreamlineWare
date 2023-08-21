@@ -4,10 +4,20 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 public class ItemDAO {
-    // Insert an item into the database
+
+    public static final Logger logger = Logger.getLogger("CustomLogger");
     public boolean addItem(Connection connection, Item item) {
+        // validate the input
+        if (item.getName().isEmpty() || item.getCategory().isEmpty() || item.getDescription().isEmpty() ||
+                item.getUnitPrice() == null || item.getQuantityInStock() <= 0 || item.getMinimumStockLevel() < 0) {
+            // warning logger
+            logger.warning("Failed to add item to database: One or more required fields are missing.");
+            return false;
+        }
+        // Insert an item into the database
         String query = "INSERT INTO items (name, category, description, unit_price, quantity_in_stock, minimum_stock_level) VALUES (?, ?, ?, ?, ?, ?)";
         try (PreparedStatement statement = connection.prepareStatement(query)) {
             // set the parameters in the prepared statement
@@ -21,8 +31,10 @@ public class ItemDAO {
             //execute the query and check if it was successful
             int rowsInserted = statement.executeUpdate();
             if (rowsInserted > 0) {
-                InventoryLogger.logInfo("Item " + item.getName() + " was successfully inserted");
+                logger.info("Item " + item.getName() + " was inserted");
                 return true;
+            } else {
+                logger.info("Item " + item.getName() + " was not inserted");
             }
             // returns true if at least one row was inserted
         } catch (SQLException e) {
