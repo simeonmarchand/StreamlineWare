@@ -20,12 +20,21 @@ public class ItemDAO {
 
             //execute the query and check if it was successful
             int rowsInserted = statement.executeUpdate();
-            return rowsInserted > 0; // returns true if at least one row was inserted
+            if (rowsInserted > 0) {
+                InventoryLogger.logInfo("Item " + item.getName() + " was successfully inserted");
+                return true;
+            }
+            // returns true if at least one row was inserted
         } catch (SQLException e) {
+            InventoryLogger.logError("Item " + item.getName() + " was not inserted");
             e.printStackTrace();
-            return false; // return false if an exception was caught
         }
+        // returns false if no rows were inserted
+        return false;
     }
 
     // Other CRUD methods can be similarly implemented here
+
+
+    // logger methods
 }
