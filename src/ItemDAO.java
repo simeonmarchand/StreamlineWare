@@ -14,7 +14,7 @@ public class ItemDAO {
         if (item.getName().isEmpty() || item.getCategory().isEmpty() || item.getDescription().isEmpty() ||
                 item.getUnitPrice() == null || item.getQuantityInStock() <= 0 || item.getMinimumStockLevel() < 0) {
             // warning logger
-            logger.warning("Failed to add item to database: One or more required fields are missing.");
+            InventoryLogger.logError("Failed to add item to database: One or more required fields are missing.");
             return false;
         }
         // Insert an item into the database
@@ -31,15 +31,13 @@ public class ItemDAO {
             //execute the query and check if it was successful
             int rowsInserted = statement.executeUpdate();
             if (rowsInserted > 0) {
-                logger.info("Item " + item.getName() + " was inserted");
+                InventoryLogger.logInfo("Item " + item.getName() + " was inserted");
                 return true;
-            } else {
-                logger.info("Item " + item.getName() + " was not inserted");
             }
             // returns true if at least one row was inserted
-        } catch (SQLException e) {
+        } catch (SQLException exception) {
             InventoryLogger.logError("Item " + item.getName() + " was not inserted");
-            e.printStackTrace();
+            exception.printStackTrace();
         }
         // returns false if no rows were inserted
         return false;
