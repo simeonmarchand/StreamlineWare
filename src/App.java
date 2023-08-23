@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
+import java.math.BigDecimal;
 
 public class App {
     private final JFrame frame; // Main application window
@@ -38,6 +39,47 @@ public class App {
     private JPanel createAddTabContent(){
         JPanel addTabPanel = new JPanel(new GridLayout(7, 2, 10, 10)); // Create a panel with 7 rows, 2 columns, and 10px horizontal and vertical gaps
         // add UI components specific to the add tab
+        addTabPanel.add(new JLabel("Item Name:"));
+        addTabPanel.add(itemNameField = new JTextField(20));
+
+        addTabPanel.add(new JLabel("Category:"));
+        addTabPanel.add(categoryField = new JTextField(20));
+
+        addTabPanel.add(new JLabel("Description:"));
+        addTabPanel.add(descriptionField = new JTextField(20));
+
+        addTabPanel.add(new JLabel("Unit Price:"));
+        addTabPanel.add(unitPriceField = new JTextField(20));
+
+        addTabPanel.add(new JLabel("Quantity in Stock:"));
+        addTabPanel.add(quantityInStockField = new JTextField(20));
+
+        addTabPanel.add(new JLabel("Minimum Stock Level:"));
+        addTabPanel.add(minimumStockLevelField = new JTextField(20));
+
+        addButton = new JButton("Add Item");
+        addTabPanel.add(new JLabel()); // Add an empty label to fill the space
+        addTabPanel.add(addButton);
+
+        // set up action listeners for the add button
+        addButton.addActionListener( e -> {
+           String name = itemNameField.getText();
+           String category = categoryField.getText();
+           String description = descriptionField.getText();
+           BigDecimal unitPrice = new BigDecimal(unitPriceField.getText());
+           int quantityInStock = Integer.parseInt(quantityInStockField.getText());
+           int minimumStockLevel = Integer.parseInt(minimumStockLevelField.getText());
+
+           Item item = new Item(name, category, description, unitPrice, quantityInStock, minimumStockLevel);
+
+//           if(itemDAO.addItem(connection, item)){
+//               JOptionPane.showMessageDialog(null, "Item added successfully!");
+//               clearInputFields();
+//           } else {
+//               JOptionPane.showMessageDialog(null, "Failed to add item.", "Error", JOptionPane.ERROR_MESSAGE);
+//           }
+        });
+
         return addTabPanel;
     }
 
