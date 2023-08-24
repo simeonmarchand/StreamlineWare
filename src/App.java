@@ -71,6 +71,13 @@ public class App {
            int minimumStockLevel = Integer.parseInt(minimumStockLevelField.getText());
 
            Item item = new Item(name, category, description, unitPrice, quantityInStock, minimumStockLevel);
+
+//           if(itemDAO.addItem(connection, item)){
+//               JOptionPane.showMessageDialog(null, "Item added successfully!");
+//               clearInputFields();
+//           } else {
+//               JOptionPane.showMessageDialog(null, "Failed to add item.", "Error", JOptionPane.ERROR_MESSAGE);
+//           }
         });
 
         return addTabPanel;
