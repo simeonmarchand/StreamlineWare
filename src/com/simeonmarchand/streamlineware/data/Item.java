@@ -1,3 +1,5 @@
+package com.simeonmarchand.streamlineware.data;
+
 import java.math.BigDecimal;
 
 public class Item {

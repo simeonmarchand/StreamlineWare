@@ -1,3 +1,5 @@
+package com.simeonmarchand.streamlineware.ui;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -13,7 +15,7 @@ public class AddTab extends JPanel {
 
         itemNameField = new JTextField();
         categoryField = new JTextField();
-        addButton = new JButton("Add Item");
+        addButton = new JButton("Add com.simeonmarchand.streamlineware.data.Item");
 
         addButton.addActionListener(new ActionListener() {
             @Override
@@ -23,7 +25,7 @@ public class AddTab extends JPanel {
             }
         });
 
-        add(new JLabel("Item Name:"));
+        add(new JLabel("com.simeonmarchand.streamlineware.data.Item Name:"));
         add(itemNameField);
         add(new JLabel("Category:"));
         add(categoryField);

@@ -1,2 +1,2 @@
-Aug 21, 2023 6:29:36 PM InventoryLogger logInfo
-INFO: Item Test was inserted
+Aug 21, 2023 6:29:36 PM com.simeonmarchand.streamlineware.logger.InventoryLogger logInfo
+INFO: com.simeonmarchand.streamlineware.data.Item Test was inserted

@@ -1,9 +1,13 @@
+package com.simeonmarchand.streamlineware.ui;
+
+import com.simeonmarchand.streamlineware.data.Item;
+
 import javax.swing.*;
 import java.awt.*;
 import java.math.BigDecimal;
 
 public class App {
-    private final JFrame frame; // Main application window
+    private final JFrame frame; // com.simeonmarchand.streamlineware.Main application window
     private JTabbedPane tabbedPane; // Tabbed pane to hold the tabs
     private JTextField itemNameField; // Text field for item name
     private JTextField categoryField; // Text field for item category
@@ -73,7 +77,7 @@ public class App {
            Item item = new Item(name, category, description, unitPrice, quantityInStock, minimumStockLevel);
 
 //           if(itemDAO.addItem(connection, item)){
-//               JOptionPane.showMessageDialog(null, "Item added successfully!");
+//               JOptionPane.showMessageDialog(null, "com.simeonmarchand.streamlineware.data.Item added successfully!");
 //               clearInputFields();
 //           } else {
 //               JOptionPane.showMessageDialog(null, "Failed to add item.", "Error", JOptionPane.ERROR_MESSAGE);

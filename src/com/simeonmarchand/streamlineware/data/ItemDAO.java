@@ -1,9 +1,11 @@
+package com.simeonmarchand.streamlineware.data;
+
+import com.simeonmarchand.streamlineware.data.Item;
+import com.simeonmarchand.streamlineware.logger.InventoryLogger;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Logger;
 
 public class ItemDAO {
@@ -31,12 +33,12 @@ public class ItemDAO {
             //execute the query and check if it was successful
             int rowsInserted = statement.executeUpdate();
             if (rowsInserted > 0) {
-                InventoryLogger.logInfo("Item " + item.getName() + " was inserted");
+                InventoryLogger.logInfo("com.simeonmarchand.streamlineware.data.Item " + item.getName() + " was inserted");
                 return true;
             }
             // returns true if at least one row was inserted
         } catch (SQLException exception) {
-            InventoryLogger.logError("Item " + item.getName() + " was not inserted");
+            InventoryLogger.logError("com.simeonmarchand.streamlineware.data.Item " + item.getName() + " was not inserted");
             exception.printStackTrace();
         }
         // returns false if no rows were inserted

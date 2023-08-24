@@ -1,5 +1,10 @@
+package com.simeonmarchand.streamlineware;
+
+import com.simeonmarchand.streamlineware.data.Item;
+import com.simeonmarchand.streamlineware.data.ItemDAO;
+import com.simeonmarchand.streamlineware.ui.App;
+
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.math.BigDecimal;
@@ -12,7 +17,7 @@ public class Main {
     private final ItemDAO itemDAO;
     private Connection connection;
     public Main() {
-        // Initialize the GUI and ItemDAO
+        // Initialize the GUI and com.simeonmarchand.streamlineware.data.ItemDAO
         app = new App(); // Changed from StreamlineWareApp
         itemDAO = new ItemDAO();
 
@@ -52,7 +57,7 @@ public class Main {
                 // call the DAO method to add the item to the database
                 if (itemDAO.addItem(connection, item)) {
                     // show success message and clear input fields
-                    JOptionPane.showMessageDialog(null, "Item added successfully!");
+                    JOptionPane.showMessageDialog(null, "com.simeonmarchand.streamlineware.data.Item added successfully!");
                     app.clearInputFields();
                 } else {
                     // show error message if item failed to be added
