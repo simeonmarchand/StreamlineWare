@@ -16,22 +16,22 @@ public class App {
     private JTextField quantityInStockField; // Text field for item quantity in stock
     private JTextField minimumStockLevelField; // Text field for item minimum stock level
     private JButton addButton; // Button to add an item
+    private JButton searchButton; // Button to search for an item
 
     public App() {
         frame = new JFrame("StreamlineWare"); // Create the main application window
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Set close operation
 
-        initializeComponents(createAddTabContent(), createSearchTabContent(), createOrdersTabContent()); // Initialize the GUI components
+        initializeComponents(createCombinedTab(), createOrdersTabContent()); // Initialize the GUI components
         setupLayout(); // Set up the layout of GUI components
 
         frame.pack(); // Pack the components within the frame
         frame.setVisible(true); // Make the frame visible
     }
 
-    private void initializeComponents(JPanel createAddTabContent, JPanel createSearchTabContent, JPanel createOrdersTabContent) {
+    private void initializeComponents(JPanel createAddTabContent, JPanel createOrdersTabContent) {
         tabbedPane = new JTabbedPane(); // Initialize the tabbed pane
-        tabbedPane.addTab("Add Item", createAddTabContent); // Add the add item tab
-        tabbedPane.addTab("Search Items", createSearchTabContent); // Add the search items tab
+        tabbedPane.addTab("Add/Search", createAddTabContent); // Add the add item tab
         tabbedPane.addTab("Orders Items", createOrdersTabContent); // Add the view items tab
         addButton = new JButton("Add Item"); // Initialize the add button
     }
@@ -40,8 +40,8 @@ public class App {
         frame.add(tabbedPane); // Add the tabbed pane to the frame
     }
 
-    private JPanel createAddTabContent(){
-        JPanel addTabPanel = new JPanel(new GridLayout(7, 2, 10, 10)); // Create a panel with 7 rows, 2 columns, and 10px horizontal and vertical gaps
+    private JPanel createCombinedTab(){
+        JPanel addTabPanel = new JPanel(new GridLayout(8, 2, 10, 10)); // Create a panel with 7 rows, 2 columns, and 10px horizontal and vertical gaps
         // add UI components specific to the add tab
         addTabPanel.add(new JLabel("Item Name:"));
         addTabPanel.add(itemNameField = new JTextField(20));
@@ -61,9 +61,15 @@ public class App {
         addTabPanel.add(new JLabel("Minimum Stock Level:"));
         addTabPanel.add(minimumStockLevelField = new JTextField(20));
 
+        // add button to the panel
         addButton = new JButton("Add Item");
-        addTabPanel.add(new JLabel()); // Add an empty label to fill the space
+        addTabPanel.add(new JLabel());
         addTabPanel.add(addButton);
+
+        // search button to the panel
+        searchButton = new JButton("Search Item");
+        addTabPanel.add(new JLabel(""));
+        addTabPanel.add(searchButton);
 
         // set up action listeners for the add button
         addButton.addActionListener( e -> {
