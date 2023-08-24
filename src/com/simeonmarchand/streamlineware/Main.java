@@ -1,5 +1,10 @@
+package com.simeonmarchand.streamlineware;
+
+import com.simeonmarchand.streamlineware.data.Item;
+import com.simeonmarchand.streamlineware.data.ItemDAO;
+import com.simeonmarchand.streamlineware.ui.App;
+
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.math.BigDecimal;
@@ -12,7 +17,7 @@ public class Main {
     private final ItemDAO itemDAO;
     private Connection connection;
     public Main() {
-        // Initialize the GUI and ItemDAO
+        // Initialize the GUI and com.simeonmarchand.streamlineware.data.ItemDAO
         app = new App(); // Changed from StreamlineWareApp
         itemDAO = new ItemDAO();
 
@@ -38,7 +43,7 @@ public class Main {
         addButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // retrieve data from input fields
+                // retrieve com.simeonmarchand.streamlineware.data from input fields
                 String name = app.getItemNameField().getText();
                 String category = app.getCategoryField().getText();
                 String description = app.getDescriptionField().getText();
@@ -46,7 +51,7 @@ public class Main {
                 int quantityInStock = Integer.parseInt(app.getQuantityInStockField().getText());
                 int minimumStockLevel = Integer.parseInt(app.getMinimumStockLevelField().getText());
 
-                // create item object with the retrieved data
+                // create item object with the retrieved com.simeonmarchand.streamlineware.data
                 Item item = new Item(name, category, description, unitPrice, quantityInStock, minimumStockLevel);
 
                 // call the DAO method to add the item to the database

@@ -1,9 +1,13 @@
+package com.simeonmarchand.streamlineware.ui;
+
+import com.simeonmarchand.streamlineware.data.Item;
+
 import javax.swing.*;
 import java.awt.*;
 import java.math.BigDecimal;
 
 public class App {
-    private final JFrame frame; // Main application window
+    private final JFrame frame; // com.simeonmarchand.streamlineware.Main application window
     private JTabbedPane tabbedPane; // Tabbed pane to hold the tabs
     private JTextField itemNameField; // Text field for item name
     private JTextField categoryField; // Text field for item category
@@ -29,7 +33,6 @@ public class App {
         tabbedPane.addTab("Add Item", createAddTabContent); // Add the add item tab
         tabbedPane.addTab("Search Items", createSearchTabContent); // Add the search items tab
         tabbedPane.addTab("Orders Items", createOrdersTabContent); // Add the view items tab
-        addButton = new JButton("Add Item"); // Initialize the add button
     }
 
     private void setupLayout() {
@@ -38,7 +41,7 @@ public class App {
 
     private JPanel createAddTabContent(){
         JPanel addTabPanel = new JPanel(new GridLayout(7, 2, 10, 10)); // Create a panel with 7 rows, 2 columns, and 10px horizontal and vertical gaps
-        // add UI components specific to the add tab
+        // add com.simeonmarchand.streamlineware.ui components specific to the add tab
         addTabPanel.add(new JLabel("Item Name:"));
         addTabPanel.add(itemNameField = new JTextField(20));
 
@@ -78,13 +81,13 @@ public class App {
 
     private JPanel createSearchTabContent(){
         JPanel searchTabPanel = new JPanel();
-        // add UI components specific to the search tab
+        // add com.simeonmarchand.streamlineware.ui components specific to the search tab
         return searchTabPanel;
     }
 
     private JPanel createOrdersTabContent(){
         JPanel ordersTabPanel = new JPanel();
-        // add UI components specific to the orders tab
+        // add com.simeonmarchand.streamlineware.ui components specific to the orders tab
         return ordersTabPanel;
     }
 

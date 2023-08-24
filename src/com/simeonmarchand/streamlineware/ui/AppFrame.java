@@ -1,3 +1,5 @@
+package com.simeonmarchand.streamlineware.ui;
+
 import javax.swing.*;
 
 public class AppFrame extends JFrame {

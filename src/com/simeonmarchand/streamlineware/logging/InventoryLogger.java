@@ -1,8 +1,10 @@
+package com.simeonmarchand.streamlineware.logging;
+
 import java.io.IOException;
 import java.util.logging.*;
 
 public class InventoryLogger {
-    private static Logger logger = Logger.getLogger("InventoryLogger");
+    private static Logger logger = Logger.getLogger("com.simeonmarchand.streamlineware.logging.InventoryLogger");
 
     static {
         Handler consoleHandler = new ConsoleHandler();
