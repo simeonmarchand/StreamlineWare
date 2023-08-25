@@ -19,6 +19,7 @@ public class ItemDAO {
             InventoryLogger.logError("Failed to add item to database: One or more required fields are missing.");
             return false;
         }
+
         // Insert an item into the database
         String query = "INSERT INTO items (name, category, description, unit_price, quantity_in_stock, minimum_stock_level) VALUES (?, ?, ?, ?, ?, ?)";
         try (PreparedStatement statement = connection.prepareStatement(query)) {
@@ -33,12 +34,14 @@ public class ItemDAO {
             //execute the query and check if it was successful
             int rowsInserted = statement.executeUpdate();
             if (rowsInserted > 0) {
-                InventoryLogger.logInfo("com.simeonmarchand.streamlineware.data.Item " + item.getName() + " was inserted");
+                InventoryLogger.logInfo("Product Item " + item.getName() + " was inserted");
                 return true;
+            } else {
+                InventoryLogger.logError("Product Item " + item.getName() + " was not inserted");
             }
             // returns true if at least one row was inserted
         } catch (SQLException exception) {
-            InventoryLogger.logError("com.simeonmarchand.streamlineware.data.Item " + item.getName() + " was not inserted");
+            InventoryLogger.logError("An SQL error occurred while inserting item " + item.getName() + " into the database");
             exception.printStackTrace();
         }
         // returns false if no rows were inserted
