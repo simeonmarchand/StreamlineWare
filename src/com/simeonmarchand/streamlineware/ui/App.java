@@ -1,5 +1,6 @@
 package com.simeonmarchand.streamlineware.ui;
 
+import com.simeonmarchand.streamlineware.data.DatabaseConnection;
 import com.simeonmarchand.streamlineware.data.Item;
 import com.simeonmarchand.streamlineware.ui.AddSearchTab;
 
@@ -8,6 +9,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.math.BigDecimal;
+import java.sql.*;
 
 public class App {
     private final JFrame frame; // com.simeonmarchand.streamlineware.Main application window
@@ -167,24 +169,40 @@ public class App {
 
         private void performSearchByName(String searchName) {
             //TODO: Implement search by name
-
-            String[] sampleResults = {"Item 1", "Item 2", "Item 3", "Item 4", "Item 5"};
-
-            StringBuilder resultMessage = new StringBuilder("Search results: \n");
-
-            boolean foundResults = false;
-
-            for (String result : sampleResults) {
-                if (result.toLowerCase().contains(searchName.toLowerCase())) {
-                    resultMessage.append(result).append("\n");
-                    foundResults = true;
-                }
+            if (searchName.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Please enter a name to search for");
+                return;
             }
 
-            if(foundResults){
-                JOptionPane.showMessageDialog(null, resultMessage.toString());
-            } else {
-                JOptionPane.showMessageDialog(null, "No results found");
+            // connect to the DB and perform the search
+            try (Connection connection = DatabaseConnection.getConnection()) {
+
+                String query = "SELECT * FROM items WHERE name LIKE ?";
+
+                try(PreparedStatement statement = connection.prepareStatement(query)) {
+                    statement.setString(1, "%" + searchName + "%");
+
+                    ResultSet resultSet = statement.executeQuery();
+
+                    StringBuilder resultMessage = new StringBuilder("Search results: \n");
+
+                    boolean foundResults = false;
+
+                    while(resultSet.next()){
+                        String itemName = resultSet.getString("name");
+                        resultMessage.append(itemName).append("\n");
+                        foundResults = true;
+                    }
+
+                    if (foundResults){
+                        JOptionPane.showMessageDialog(this, resultMessage.toString(), "Search Results", JOptionPane.INFORMATION_MESSAGE);
+                    } else {
+                        JOptionPane.showMessageDialog(this, "No results found for '" + searchName + "'.", "Search Results", JOptionPane.INFORMATION_MESSAGE);
+                    }
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(this, "An error occurred while searching for '" + searchName + "'.", "Search Results", JOptionPane.ERROR_MESSAGE);
             }
         }
     }
