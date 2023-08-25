@@ -57,7 +57,7 @@ public class Main {
                 // call the DAO method to add the item to the database
                 if (itemDAO.addItem(connection, item)) {
                     // show success message and clear input fields
-                    JOptionPane.showMessageDialog(null, "com.simeonmarchand.streamlineware.data.Item added successfully!");
+                    JOptionPane.showMessageDialog(null, "Product item added successfully!");
                     app.clearInputFields();
                 } else {
                     // show error message if item failed to be added
