@@ -144,7 +144,48 @@ public class App {
             searchFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             searchFrame.setSize(500, 500);
 
+            // Create and set up the UI components
+            JPanel searchPanel = new JPanel(new FlowLayout());
+
+            JLabel nameLabel = new JLabel("Search by product Name: ");
+            JTextField nameField = new JTextField(20);
+            JButton searchButton = new JButton("Search");
+
+            searchButton.addActionListener(e -> {
+                String searchName = nameField.getText();
+                performSearchByName(searchName);
+            });
+
+            searchPanel.add(nameLabel);
+            searchPanel.add(nameField);
+            searchPanel.add(searchButton);
+
+
+            searchFrame.add(searchPanel);
             searchFrame.setVisible(true);
+        }
+
+        private void performSearchByName(String searchName) {
+            //TODO: Implement search by name
+
+            String[] sampleResults = {"Item 1", "Item 2", "Item 3", "Item 4", "Item 5"};
+
+            StringBuilder resultMessage = new StringBuilder("Search results: \n");
+
+            boolean foundResults = false;
+
+            for (String result : sampleResults) {
+                if (result.toLowerCase().contains(searchName.toLowerCase())) {
+                    resultMessage.append(result).append("\n");
+                    foundResults = true;
+                }
+            }
+
+            if(foundResults){
+                JOptionPane.showMessageDialog(null, resultMessage.toString());
+            } else {
+                JOptionPane.showMessageDialog(null, "No results found");
+            }
         }
     }
 

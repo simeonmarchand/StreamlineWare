@@ -29,7 +29,7 @@ public class AddSearchTab extends JPanel{
         JFrame searchFrame = new JFrame("Search Window");
         searchFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         searchFrame.setSize(500, 500);
-
+        
         searchFrame.setVisible(true);
     }
 }
