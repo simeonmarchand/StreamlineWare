@@ -1,13 +1,17 @@
 package com.simeonmarchand.streamlineware.ui;
 
 import com.simeonmarchand.streamlineware.data.Item;
+import com.simeonmarchand.streamlineware.ui.AddSearchTab;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.math.BigDecimal;
 
 public class App {
     private final JFrame frame; // com.simeonmarchand.streamlineware.Main application window
+    private AddSearchTab addSearchTab; // Add/Search tab
     private JTabbedPane tabbedPane; // Tabbed pane to hold the tabs
     private JTextField itemNameField; // Text field for item name
     private JTextField categoryField; // Text field for item category
@@ -31,6 +35,7 @@ public class App {
 
     private void initializeComponents(JPanel createAddTabContent, JPanel createOrdersTabContent) {
         tabbedPane = new JTabbedPane(); // Initialize the tabbed pane
+        addSearchTab = new AddSearchTab(); // Initialize the add/search tab
         tabbedPane.addTab("Add/Search", createAddTabContent); // Add the add item tab
         tabbedPane.addTab("Orders Items", createOrdersTabContent); // Add the view items tab
     }
@@ -83,17 +88,17 @@ public class App {
         /*
         Search button listener
          */
+        searchButton.addActionListener(e -> {
+            AddSearchTab addSearchTab = new AddSearchTab();
+            addSearchTab.openSearchWindow();
+        });
 
-        searchButton.addActionListener(e1 -> {
-            String name = itemNameField.getText();
-            String category = categoryField.getText();
-            String description = descriptionField.getText();
-            BigDecimal unitPrice = new BigDecimal(unitPriceField.getText());
-            int quantityInStock = Integer.parseInt(quantityInStockField.getText());
-            int minimumStockLevel = Integer.parseInt(minimumStockLevelField.getText());
+        JButton searchButton = new JButton("Search Item");
+        searchButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
 
-            Item item = new Item(name, category, description, unitPrice, quantityInStock, minimumStockLevel);
-
+            }
         });
         return addTabPanel;
     }
@@ -116,6 +121,31 @@ public class App {
 
     public static void  main(String[] args) {
         SwingUtilities.invokeLater(App::new); // Create the application
+    }
+
+    class AddSearchTab extends JPanel{
+        private JButton searchButton;
+
+        public AddSearchTab(){
+            setupUI();
+        }
+
+        private void setupUI(){
+            setLayout(new FlowLayout());
+
+            searchButton = new JButton("Search");
+            add(searchButton);
+
+            searchButton.addActionListener(e -> openSearchWindow());
+        }
+
+        public void openSearchWindow() {
+            JFrame searchFrame = new JFrame("Search Window");
+            searchFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            searchFrame.setSize(500, 500);
+
+            searchFrame.setVisible(true);
+        }
     }
 
 

@@ -1,6 +1,8 @@
 package com.simeonmarchand.streamlineware.ui;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class AddSearchTab extends JPanel{
     private JTextField itemNameField; // Text field for item name
@@ -14,5 +16,20 @@ public class AddSearchTab extends JPanel{
 
     public AddSearchTab(){
 
+        searchButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                openSearchWindow();
+            }
+        });
+
+    }
+
+    private void openSearchWindow() {
+        JFrame searchFrame = new JFrame("Search Window");
+        searchFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        searchFrame.setSize(500, 500);
+
+        searchFrame.setVisible(true);
     }
 }
