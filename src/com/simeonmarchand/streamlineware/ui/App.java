@@ -47,6 +47,12 @@ public class App {
         frame.add(tabbedPane); // Add the tabbed pane to the frame
     }
 
+
+    /*
+
+    Add tab content
+
+     */
     private JPanel createAddTabContent(){
         JPanel addTabPanel = new JPanel(new GridLayout(8, 2, 10, 10)); // Create a panel with 7 rows, 2 columns, and 10px horizontal and vertical gaps
 
@@ -73,7 +79,9 @@ public class App {
 
 
         /*
+
         Add button listener
+
          */
 
         addButton.addActionListener(e -> {
@@ -89,7 +97,9 @@ public class App {
         });
 
         /*
+
         Search button listener
+
          */
         searchButton.addActionListener(e -> {
             AddSearchTab addSearchTab = new AddSearchTab();
@@ -105,6 +115,12 @@ public class App {
         });
         return addTabPanel;
     }
+
+    /*
+
+    Orders tab content
+
+     */
 
     private JPanel createOrdersTabContent(){
         JPanel ordersTabPanel = new JPanel();
@@ -142,6 +158,12 @@ public class App {
             searchButton.addActionListener(e -> openSearchWindow());
         }
 
+        /*
+
+        Opens the search window
+
+         */
+
         public void openSearchWindow() {
             JFrame searchFrame = new JFrame("Search Window");
             searchFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -177,7 +199,11 @@ public class App {
 
 
         /*
+
+
         Searches for all items in the database and displays the item names in a message dialog
+
+
          */
         private void performAllSearch(String searchAll) {
             //TODO: Implement search all
@@ -219,6 +245,12 @@ public class App {
                 throw new RuntimeException(e);
             }
         }
+
+        /*
+
+        Search by name method
+
+         */
 
         private void performSearchByName(String searchName) {
             //TODO: Implement search by name
