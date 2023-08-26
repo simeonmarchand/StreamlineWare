@@ -152,6 +152,7 @@ public class App {
             JLabel nameLabel = new JLabel("Search by product Name: ");
             JTextField nameField = new JTextField(20);
             JButton searchButton = new JButton("Search");
+            JButton searchAllButton = new JButton("Search All");
 
             searchButton.addActionListener(e -> {
                 String searchName = nameField.getText();
@@ -161,6 +162,7 @@ public class App {
             searchPanel.add(nameLabel);
             searchPanel.add(nameField);
             searchPanel.add(searchButton);
+            searchPanel.add(searchAllButton);
 
 
             searchFrame.add(searchPanel);
