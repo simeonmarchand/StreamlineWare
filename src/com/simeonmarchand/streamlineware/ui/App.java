@@ -2,6 +2,7 @@ package com.simeonmarchand.streamlineware.ui;
 
 import com.simeonmarchand.streamlineware.data.DatabaseConnection;
 import com.simeonmarchand.streamlineware.data.Item;
+import com.simeonmarchand.streamlineware.logger.InventoryLogger;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,6 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.math.BigDecimal;
 import java.sql.*;
+import java.util.logging.Logger;
 
 public class App {
     private final JFrame frame; // com.simeonmarchand.streamlineware.Main application window
@@ -173,6 +175,10 @@ public class App {
             searchFrame.setVisible(true);
         }
 
+
+        /*
+        Searches for all items in the database and displays the item names in a message dialog
+         */
         private void performAllSearch(String searchAll) {
             //TODO: Implement search all
             try(Connection connection = DatabaseConnection.getConnection()){
@@ -189,7 +195,17 @@ public class App {
 
                     while(resultSet.next()){
                         String itemName = resultSet.getString("name");
+                        String itemCategory = resultSet.getString("category");
+                        String itemDescription = resultSet.getString("description");
+                        BigDecimal itemUnitPrice = resultSet.getBigDecimal("unit_price");
+                        int itemQuantityInStock = resultSet.getInt("quantity_in_stock");
+                        int itemMinimumStockLevel = resultSet.getInt("minimum_stock_level");
                         resultMessage.append(itemName).append("\n");
+                        resultMessage.append(itemCategory).append("\n");
+                        resultMessage.append(itemDescription).append("\n");
+                        resultMessage.append(itemUnitPrice).append("\n");
+                        resultMessage.append(itemQuantityInStock).append("\n");
+                        resultMessage.append(itemMinimumStockLevel).append("\n");
                         foundResults = true;
                     }
 
