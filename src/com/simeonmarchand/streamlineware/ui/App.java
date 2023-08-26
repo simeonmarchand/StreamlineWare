@@ -2,7 +2,6 @@ package com.simeonmarchand.streamlineware.ui;
 
 import com.simeonmarchand.streamlineware.data.DatabaseConnection;
 import com.simeonmarchand.streamlineware.data.Item;
-import com.simeonmarchand.streamlineware.ui.AddSearchTab;
 
 import javax.swing.*;
 import java.awt.*;
@@ -159,6 +158,11 @@ public class App {
                 performSearchByName(searchName);
             });
 
+            searchAllButton.addActionListener(e -> {
+                String searchAll = nameField.getText();
+                performAllSearch(searchAll);
+            });
+
             searchPanel.add(nameLabel);
             searchPanel.add(nameField);
             searchPanel.add(searchButton);
@@ -167,6 +171,37 @@ public class App {
 
             searchFrame.add(searchPanel);
             searchFrame.setVisible(true);
+        }
+
+        private void performAllSearch(String searchAll) {
+            //TODO: Implement search all
+            try(Connection connection = DatabaseConnection.getConnection()){
+
+                String query = "SELECT * FROM items";
+                System.out.println(query);
+
+                try(PreparedStatement statement = connection.prepareStatement(query)){
+                    ResultSet resultSet = statement.executeQuery();
+
+                    StringBuilder resultMessage = new StringBuilder("Search results: \n");
+
+                    boolean foundResults = false;
+
+                    while(resultSet.next()){
+                        String itemName = resultSet.getString("name");
+                        resultMessage.append(itemName).append("\n");
+                        foundResults = true;
+                    }
+
+                    if (foundResults){
+                        JOptionPane.showMessageDialog(this, resultMessage.toString(), "Search Results", JOptionPane.INFORMATION_MESSAGE);
+                    } else {
+                        JOptionPane.showMessageDialog(this, "No results found for '" + searchAll + "'.", "Search Results", JOptionPane.INFORMATION_MESSAGE);
+                    }
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
         }
 
         private void performSearchByName(String searchName) {
