@@ -237,8 +237,10 @@ public class App {
 
                     if (foundResults){
                         JOptionPane.showMessageDialog(this, resultMessage.toString(), "Search Results", JOptionPane.INFORMATION_MESSAGE);
+                        InventoryLogger.logInfo("Search results: " + resultMessage.toString());
                     } else {
                         JOptionPane.showMessageDialog(this, "No results found for '" + searchAll + "'.", "Search Results", JOptionPane.INFORMATION_MESSAGE);
+                        InventoryLogger.logInfo("No results found for '" + searchAll + "'.");
                     }
                 }
             } catch (SQLException e) {
@@ -281,8 +283,10 @@ public class App {
 
                     if (foundResults){
                         JOptionPane.showMessageDialog(this, resultMessage.toString(), "Search Results", JOptionPane.INFORMATION_MESSAGE);
+                        InventoryLogger.logInfo("Search results: " + resultMessage.toString());
                     } else {
                         JOptionPane.showMessageDialog(this, "No results found for '" + searchName + "'.", "Search Results", JOptionPane.INFORMATION_MESSAGE);
+                        InventoryLogger.logInfo("No results found for '" + searchName + "'.");
                     }
                 }
             } catch (SQLException e) {

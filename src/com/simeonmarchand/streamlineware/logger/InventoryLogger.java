@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.logging.*;
 
 public class InventoryLogger {
-    private static Logger logger = Logger.getLogger("com.simeonmarchand.streamlineware.logger.InventoryLogger");
+    private static Logger logger = Logger.getLogger("InventoryLogger");
 
     static {
         Handler consoleHandler = new ConsoleHandler();

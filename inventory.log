@@ -1,2 +1,43 @@
-Aug 25, 2023 9:48:53 AM com.simeonmarchand.streamlineware.logger.InventoryLogger logInfo
-INFO: Product Item Test was inserted
+Aug 26, 2023 12:21:36 PM com.simeonmarchand.streamlineware.logger.InventoryLogger logInfo
+INFO: Search results: Search results: 
+Nike Air Force 1
+
+Aug 26, 2023 12:22:49 PM com.simeonmarchand.streamlineware.logger.InventoryLogger logInfo
+INFO: Search results: Search results: 
+Macbook
+Technology
+This is an Apple computer
+1000.00
+1
+1
+Nike Air Force 1
+Shoe
+These are Nike Air Force 1's that are in new condition
+150.00
+10
+2
+X32
+Sound
+Behringer X32 (Crap)
+2200.00
+1
+0
+Cat
+Animal
+This is a kitten named Noodle
+1000.00
+1
+1
+Test
+Test
+Test
+100.00
+1
+1
+Lucy
+Animal
+Lucy is a Dog
+1000.00
+1
+1
+
