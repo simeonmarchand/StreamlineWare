@@ -124,7 +124,50 @@ public class App {
 
     private JPanel createOrdersTabContent(){
         JPanel ordersTabPanel = new JPanel(new BorderLayout());
-        
+
+        JPanel orderFormPanel = new JPanel(new GridLayout(8, 2, 10, 10));
+        orderFormPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+
+        orderFormPanel.add(new JLabel("Item Name:"));
+        JTextField itemNameField = new JTextField(20);
+        orderFormPanel.add(itemNameField);
+
+        orderFormPanel.add(new JLabel("Quantity:"));
+        JTextField quantityField = new JTextField(20);
+        orderFormPanel.add(quantityField);
+
+        orderFormPanel.add(new JLabel("Customer Name:"));
+        JTextField customerNameField = new JTextField(20);
+        orderFormPanel.add(customerNameField);
+
+        orderFormPanel.add(new JLabel("Customer Email:"));
+        JTextField customerEmailField = new JTextField(20);
+        orderFormPanel.add(customerEmailField);
+
+        JButton orderButton = new JButton("Order");
+        orderFormPanel.add(new JLabel());
+        orderFormPanel.add(orderButton);
+
+        orderButton.addActionListener(e -> {
+            String itemName = itemNameField.getText();
+            int quantity = Integer.parseInt(quantityField.getText());
+            String customerName = customerNameField.getText();
+            String customerEmail = customerEmailField.getText();
+
+            InventoryLogger.logInfo("Order placed for " + quantity + " of " + itemName + " by " + customerName + " (" + customerEmail + ")");
+
+            //Show success of order to the user
+            JOptionPane.showMessageDialog(null, "Order placed for " + quantity + " of " + itemName + " by " + customerName + " (" + customerEmail + ")");
+
+            // clear input fields
+            itemNameField.setText("");
+            quantityField.setText("");
+            customerNameField.setText("");
+            customerEmailField.setText("");
+        });
+
+        ordersTabPanel.add(orderFormPanel, BorderLayout.CENTER);
+
         return ordersTabPanel;
     }
 
