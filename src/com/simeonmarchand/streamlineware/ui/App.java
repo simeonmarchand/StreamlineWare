@@ -13,7 +13,7 @@ import java.sql.*;
 import java.util.logging.Logger;
 
 public class App {
-    private final JFrame frame; // com.simeonmarchand.streamlineware.Main application window
+    private final JFrame frame; // Main application window
     private AddSearchTab addSearchTab; // Add/Search tab
     private JTabbedPane tabbedPane; // Tabbed pane to hold the tabs
     private JTextField itemNameField; // Text field for item name
@@ -123,8 +123,8 @@ public class App {
      */
 
     private JPanel createOrdersTabContent(){
-        JPanel ordersTabPanel = new JPanel();
-        // add UI components specific to the orders tab
+        JPanel ordersTabPanel = new JPanel(new BorderLayout());
+        
         return ordersTabPanel;
     }
 
@@ -210,6 +210,7 @@ public class App {
             try(Connection connection = DatabaseConnection.getConnection()){
 
                 String query = "SELECT * FROM items";
+                // select * from items where field1 like '%" + searchterm + "%' and field2 like
                 System.out.println(query);
 
                 try(PreparedStatement statement = connection.prepareStatement(query)){

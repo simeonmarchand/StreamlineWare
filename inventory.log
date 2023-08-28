@@ -1,8 +1,4 @@
-Aug 26, 2023 12:21:36 PM com.simeonmarchand.streamlineware.logger.InventoryLogger logInfo
-INFO: Search results: Search results: 
-Nike Air Force 1
-
-Aug 26, 2023 12:22:49 PM com.simeonmarchand.streamlineware.logger.InventoryLogger logInfo
+Aug 27, 2023 11:29:38 AM com.simeonmarchand.streamlineware.logger.InventoryLogger logInfo
 INFO: Search results: Search results: 
 Macbook
 Technology
@@ -40,4 +36,8 @@ Lucy is a Dog
 1000.00
 1
 1
+
+Aug 27, 2023 11:30:05 AM com.simeonmarchand.streamlineware.logger.InventoryLogger logInfo
+INFO: Search results: Search results: 
+Nike Air Force 1
 
