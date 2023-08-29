@@ -11,7 +11,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.math.BigDecimal;
 import java.sql.*;
-import java.util.logging.Logger;
 
 public class App {
     private final JFrame frame; // Main application window
@@ -30,7 +29,7 @@ public class App {
         frame = new JFrame("StreamlineWare"); // Create the main application window
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Set close operation
 
-        initializeComponents(createAddTabContent(), createOrdersTabContent()); // Initialize the GUI components
+        initializeComponents(addTabContent(), ordersTabContent()); // Initialize the GUI components
         setupLayout(); // Set up the layout of GUI components
 
         frame.pack(); // Pack the components within the frame
@@ -54,7 +53,7 @@ public class App {
     Add tab content
 
      */
-    private JPanel createAddTabContent(){
+    private JPanel addTabContent(){
         JPanel addTabPanel = new JPanel(new GridLayout(10, 2, 11, 11)); // Create a panel with 7 rows, 2 columns, and 10px horizontal and vertical gaps
 
         addTabPanel.add(new JLabel("Item Name:"));
@@ -78,7 +77,7 @@ public class App {
         addTabPanel.add(new JLabel(""));
         addTabPanel.add(searchButton);
 
-        JButton deleteItem = new JButton("Delete Item");
+        JButton deleteItem = new JButton("Delete All Items");
         addTabPanel.add(new JLabel(""));
         addTabPanel.add(deleteItem);
 
@@ -126,64 +125,40 @@ public class App {
 
      */
 
-    private JPanel createOrdersTabContent(){
+    private JPanel ordersTabContent(){
         JPanel ordersTabPanel = new JPanel(new BorderLayout());
 
-        JPanel orderFormPanel = new JPanel(new GridLayout(8, 2, 10, 10));
+        JPanel orderFormPanel = new JPanel(new GridLayout(3, 2, 11, 11));
         orderFormPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
-        orderFormPanel.add(new JLabel("Item Name:"));
-        JTextField itemNameField = new JTextField(20);
-        orderFormPanel.add(itemNameField);
-        System.out.println(itemNameField.getText());
-
-        orderFormPanel.add(new JLabel("Quantity:"));
-        JTextField quantityField = new JTextField(20);
-        orderFormPanel.add(quantityField);
-        System.out.println(quantityField.getText());
-
-        orderFormPanel.add(new JLabel("Customer Name:"));
-        JTextField customerNameField = new JTextField(20);
-        orderFormPanel.add(customerNameField);
-        System.out.println(customerNameField.getText());
-
-        orderFormPanel.add(new JLabel("Customer Email:"));
-        JTextField customerEmailField = new JTextField(20);
-        orderFormPanel.add(customerEmailField);
-        System.out.println(customerEmailField.getText());
-
-        JButton orderButton = new JButton("Order");
+        JButton placeOrderButton = new JButton("Place Order");
         orderFormPanel.add(new JLabel());
-        orderFormPanel.add(orderButton);
+        orderFormPanel.add(placeOrderButton);
 
-        orderButton.addActionListener(e -> {
+        JButton viewOrdersButton = new JButton("View Orders");
+        orderFormPanel.add(new JLabel());
+        orderFormPanel.add(viewOrdersButton);
+
+        JButton deleteOrdersButton = new JButton("Delete Orders");
+        orderFormPanel.add(new JLabel());
+        orderFormPanel.add(deleteOrdersButton);
+
+        placeOrderButton.addActionListener(e -> {
             //TODO: Implement order button
             // currently just gets the items that are entered into the fields
             // but does not do anything with them yet, need to get it to remove the item from the the DB
+            InventoryLogger.logInfo("Order button clicked");
             System.out.println("Order button clicked");
-            String itemName = itemNameField.getText();
-            System.out.println("Your Item name was: " + itemName);
-            int quantityOrdered = Integer.parseInt(quantityField.getText());
-            System.out.println("Your quantity was: " + quantityOrdered);
-            String customerName = customerNameField.getText();
-            System.out.println("Your customer name was: " + customerName);
-            String customerEmail = customerEmailField.getText();
-            System.out.println("Your customer email was: " + customerEmail);
+        });
 
-            // create an Item object with retrieved item details
-            Item item = new Item(itemName, quantityOrdered, customerName, customerEmail);
-            System.out.println("Item object created: " + item);
-            InventoryLogger.logInfo("Order placed for " + quantityOrdered + " of " + itemName + " by " + customerName + " (" + customerEmail + ")");
+        viewOrdersButton.addActionListener(e -> {
+            InventoryLogger.logInfo("View orders button clicked");
+            System.out.println("View orders button clicked");
+        });
 
-            // update database with new item quantity
-            OrderDAO orderDAO = new OrderDAO();
-            orderDAO.updateItemQuantity(item);
-
-            // clear input fields
-            itemNameField.setText("");
-            quantityField.setText("");
-            customerNameField.setText("");
-            customerEmailField.setText("");
+        deleteOrdersButton.addActionListener(e -> {
+            InventoryLogger.logInfo("Delete orders button clicked");
+            System.out.println("Delete orders button clicked");
         });
 
         ordersTabPanel.add(orderFormPanel, BorderLayout.CENTER);
