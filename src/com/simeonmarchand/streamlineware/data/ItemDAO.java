@@ -50,6 +50,13 @@ public class ItemDAO {
 
     // Other CRUD methods can be similarly implemented here
 
+    // delete item from database method
+    public boolean deleteItem(Connection connection, Item item){
+
+
+        return false;
+    }
+
 
     // logger methods
 }

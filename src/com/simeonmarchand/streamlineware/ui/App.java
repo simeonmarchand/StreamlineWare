@@ -55,7 +55,7 @@ public class App {
 
      */
     private JPanel createAddTabContent(){
-        JPanel addTabPanel = new JPanel(new GridLayout(8, 2, 10, 10)); // Create a panel with 7 rows, 2 columns, and 10px horizontal and vertical gaps
+        JPanel addTabPanel = new JPanel(new GridLayout(10, 2, 11, 11)); // Create a panel with 7 rows, 2 columns, and 10px horizontal and vertical gaps
 
         addTabPanel.add(new JLabel("Item Name:"));
         addTabPanel.add(itemNameField = new JTextField(20));
@@ -77,6 +77,28 @@ public class App {
         searchButton = new JButton("Search Item");
         addTabPanel.add(new JLabel(""));
         addTabPanel.add(searchButton);
+
+        JButton deleteItem = new JButton("Delete Item");
+        addTabPanel.add(new JLabel(""));
+        addTabPanel.add(deleteItem);
+
+        /*
+
+        Delete button listener
+
+         */
+        deleteItem.addActionListener(e -> {
+            String query = "DELETE FROM items";
+            try(Connection connection = DatabaseConnection.getConnection()){
+                try(PreparedStatement statement = connection.prepareStatement(query)){
+                    statement.executeUpdate();
+                    JOptionPane.showMessageDialog(null, "All items deleted");
+                    InventoryLogger.logInfo("All items deleted");
+                }
+            } catch (SQLException exception) {
+                throw new RuntimeException(exception);
+            }
+        });
 
         /*
 
