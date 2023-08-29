@@ -1,5 +1,7 @@
 package com.simeonmarchand.streamlineware.ui;
 
+import com.simeonmarchand.streamlineware.logger.InventoryLogger;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -33,6 +35,9 @@ public class PlaceOrderForm extends JFrame {
         orderPanel.add(new JLabel("Customer Email:"));
         customerEmailField = new JTextField();
         orderPanel.add(customerEmailField);
+        orderPanel.add(new JLabel("Order Notes:"));
+        orderNotesField = new JTextField();
+        orderPanel.add(orderNotesField);
         
         JButton placeOrderButton = new JButton("Place Order");
         orderPanel.add(new JLabel());
@@ -52,6 +57,16 @@ public class PlaceOrderForm extends JFrame {
                 String customerName = customerNameField.getText();
                 String customerEmail = customerEmailField.getText();
                 String orderNotes = orderNotesField.getText();
+                
+                // log the input values
+                InventoryLogger.logInfo("This information is being logged\n" + " Item Name: " + itemName + " Quantity" +
+                        " " + quantity + " Order Date" + orderDate + " Customer Name " + customerName + " Customer Email " + customerEmail + " Order Notes " + orderNotes);
+                
+                // update the database
+                // add the order
+                // display a success/failure message
+                
+                JOptionPane.showMessageDialog(null, "Order Placed Successfully");
                 dispose();
             }
         });

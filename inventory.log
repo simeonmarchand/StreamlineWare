@@ -1,2 +1,5 @@
-Aug 29, 2023 2:45:18 PM com.simeonmarchand.streamlineware.logger.InventoryLogger logInfo
+Aug 29, 2023 2:50:20 PM com.simeonmarchand.streamlineware.logger.InventoryLogger logInfo
 INFO: Order button clicked
+Aug 29, 2023 2:50:39 PM com.simeonmarchand.streamlineware.logger.InventoryLogger logInfo
+INFO: This information is being logged
+Item Name: NikeQuantity1Order Date08/29/2023Customer NameSimeonCustomer Emailsrm@gmail.comOrder NotesNo notes
