@@ -2,6 +2,7 @@ package com.simeonmarchand.streamlineware.ui;
 
 import com.simeonmarchand.streamlineware.data.DatabaseConnection;
 import com.simeonmarchand.streamlineware.data.Item;
+import com.simeonmarchand.streamlineware.data.OrderDAO;
 import com.simeonmarchand.streamlineware.logger.InventoryLogger;
 
 import javax.swing.*;
@@ -77,25 +78,6 @@ public class App {
         addTabPanel.add(new JLabel(""));
         addTabPanel.add(searchButton);
 
-
-        /*
-
-        Add button listener
-
-         */
-
-        addButton.addActionListener(e -> {
-            String name = itemNameField.getText();
-            String category = categoryField.getText();
-            String description = descriptionField.getText();
-            BigDecimal unitPrice = new BigDecimal(unitPriceField.getText());
-            int quantityInStock = Integer.parseInt(quantityInStockField.getText());
-            int minimumStockLevel = Integer.parseInt(minimumStockLevelField.getText());
-
-            Item item = new Item(name, category, description, unitPrice, quantityInStock, minimumStockLevel);
-
-        });
-
         /*
 
         Search button listener
@@ -131,33 +113,49 @@ public class App {
         orderFormPanel.add(new JLabel("Item Name:"));
         JTextField itemNameField = new JTextField(20);
         orderFormPanel.add(itemNameField);
+        System.out.println(itemNameField.getText());
 
         orderFormPanel.add(new JLabel("Quantity:"));
         JTextField quantityField = new JTextField(20);
         orderFormPanel.add(quantityField);
+        System.out.println(quantityField.getText());
 
         orderFormPanel.add(new JLabel("Customer Name:"));
         JTextField customerNameField = new JTextField(20);
         orderFormPanel.add(customerNameField);
+        System.out.println(customerNameField.getText());
 
         orderFormPanel.add(new JLabel("Customer Email:"));
         JTextField customerEmailField = new JTextField(20);
         orderFormPanel.add(customerEmailField);
+        System.out.println(customerEmailField.getText());
 
         JButton orderButton = new JButton("Order");
         orderFormPanel.add(new JLabel());
         orderFormPanel.add(orderButton);
 
         orderButton.addActionListener(e -> {
+            //TODO: Implement order button
+            // currently just gets the items that are entered into the fields
+            // but does not do anything with them yet, need to get it to remove the item from the the DB
+            System.out.println("Order button clicked");
             String itemName = itemNameField.getText();
-            int quantity = Integer.parseInt(quantityField.getText());
+            System.out.println("Your Item name was: " + itemName);
+            int quantityOrdered = Integer.parseInt(quantityField.getText());
+            System.out.println("Your quantity was: " + quantityOrdered);
             String customerName = customerNameField.getText();
+            System.out.println("Your customer name was: " + customerName);
             String customerEmail = customerEmailField.getText();
+            System.out.println("Your customer email was: " + customerEmail);
 
-            InventoryLogger.logInfo("Order placed for " + quantity + " of " + itemName + " by " + customerName + " (" + customerEmail + ")");
+            // create an Item object with retrieved item details
+            Item item = new Item(itemName, quantityOrdered, customerName, customerEmail);
+            System.out.println("Item object created: " + item);
+            InventoryLogger.logInfo("Order placed for " + quantityOrdered + " of " + itemName + " by " + customerName + " (" + customerEmail + ")");
 
-            //Show success of order to the user
-            JOptionPane.showMessageDialog(null, "Order placed for " + quantity + " of " + itemName + " by " + customerName + " (" + customerEmail + ")");
+            // update database with new item quantity
+            OrderDAO orderDAO = new OrderDAO();
+            orderDAO.updateItemQuantity(item);
 
             // clear input fields
             itemNameField.setText("");
@@ -376,6 +374,10 @@ public class App {
 
     public JButton getAddButton() {
         return addButton;
+    }
+
+    public JButton getSearchButton() {
+        return searchButton;
     }
 
 }

@@ -2,6 +2,7 @@ package com.simeonmarchand.streamlineware;
 
 import com.simeonmarchand.streamlineware.data.Item;
 import com.simeonmarchand.streamlineware.data.ItemDAO;
+import com.simeonmarchand.streamlineware.data.OrderDAO;
 import com.simeonmarchand.streamlineware.ui.App;
 
 import javax.swing.*;
@@ -15,11 +16,14 @@ import java.sql.SQLException;
 public class Main {
     private final App app;
     private final ItemDAO itemDAO;
+    private final OrderDAO orderDAO;
     private Connection connection;
     public Main() {
         // Initialize the GUI and com.simeonmarchand.streamlineware.data.ItemDAO
         app = new App(); // Changed from StreamlineWareApp
         itemDAO = new ItemDAO();
+        orderDAO = new OrderDAO();
+
 
         // Initialize the database connection
         String dbUrl = "jdbc:mysql://localhost:3306/streamlineware";
@@ -39,6 +43,7 @@ public class Main {
     private void setupListeners() {
         // attach action listeners to "Add" button
         JButton addButton = app.getAddButton();
+        JButton searchButton = app.getSearchButton();
 
         addButton.addActionListener(new ActionListener() {
             @Override
@@ -65,6 +70,15 @@ public class Main {
                 }
             }
         });
+
+        searchButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // retrieve data from input fields for the search
+            }
+        });
+
+
     }
 
     public static void main(String[] args) {

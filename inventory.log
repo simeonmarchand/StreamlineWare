@@ -1,2 +1,4 @@
-Aug 28, 2023 1:36:38 PM com.simeonmarchand.streamlineware.logger.InventoryLogger logInfo
-INFO: Order placed for 1 of Test by Simeon Marchand (simeonrmarchand@gmail.com)
+Aug 29, 2023 11:33:26 AM com.simeonmarchand.streamlineware.logger.InventoryLogger logInfo
+INFO: Order placed for 1 of Noodle by simeon (srm@gmail.com)
+Aug 29, 2023 11:33:43 AM com.simeonmarchand.streamlineware.logger.InventoryLogger logInfo
+INFO: Order placed for 100 of Fake by simeon (srm@gmail.com)

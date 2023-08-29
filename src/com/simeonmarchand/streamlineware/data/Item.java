@@ -3,6 +3,7 @@
     import java.math.BigDecimal;
 
     public class Item {
+        private int itemID;
         private String name;
         private String category;
         private String description;
@@ -20,7 +21,12 @@
             this.minimumStockLevel = minimumStockLevel;
         }
 
+        public Item(String itemName, int quantityOrderd, String customerName, String customerEmail) {
+
+        }
+
         // getter methods for retrieving the values of the item's fields
+
         public String getName() {
             return name;
         }
@@ -43,5 +49,9 @@
 
         public int getMinimumStockLevel() {
             return minimumStockLevel;
+        }
+
+        public int getItemID() {
+            return 0;
         }
     }
