@@ -144,18 +144,22 @@ public class App {
         orderFormPanel.add(deleteOrdersButton);
 
         placeOrderButton.addActionListener(e -> {
-            //TODO: Implement order button
-            // currently just gets the items that are entered into the fields
-            // but does not do anything with them yet, need to get it to remove the item from the the DB
+            //TODO: implement the place order button function to open a new window that has a form that can be filled
+            // out this form will remove the quantity of the item from the database and add it to the orders table
             InventoryLogger.logInfo("Order button clicked");
             System.out.println("Order button clicked");
+            new PlaceOrderForm();
+            
         });
-
+        
+        //TODO: implement the view orders button function to open a new window that displays all the orders in the database
+        // would be nice to also have the ability to edit an order.. we will see. one step at a time.
         viewOrdersButton.addActionListener(e -> {
             InventoryLogger.logInfo("View orders button clicked");
             System.out.println("View orders button clicked");
         });
-
+        
+        //TODO: implement the delete orders button function to delete all the orders in the database
         deleteOrdersButton.addActionListener(e -> {
             InventoryLogger.logInfo("Delete orders button clicked");
             System.out.println("Delete orders button clicked");

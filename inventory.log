@@ -1,10 +1,2 @@
-Aug 29, 2023 2:24:22 PM com.simeonmarchand.streamlineware.logger.InventoryLogger logInfo
+Aug 29, 2023 2:45:18 PM com.simeonmarchand.streamlineware.logger.InventoryLogger logInfo
 INFO: Order button clicked
-Aug 29, 2023 2:24:22 PM com.simeonmarchand.streamlineware.logger.InventoryLogger logInfo
-INFO: View orders button clicked
-Aug 29, 2023 2:24:23 PM com.simeonmarchand.streamlineware.logger.InventoryLogger logInfo
-INFO: Delete orders button clicked
-Aug 29, 2023 2:24:23 PM com.simeonmarchand.streamlineware.logger.InventoryLogger logInfo
-INFO: Delete orders button clicked
-Aug 29, 2023 2:24:24 PM com.simeonmarchand.streamlineware.logger.InventoryLogger logInfo
-INFO: View orders button clicked
