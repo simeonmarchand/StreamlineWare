@@ -89,7 +89,10 @@ public class PlaceOrderForm extends JFrame {
                         if (currentStock >= requestedQuantity){
                             String getItemIDQuery = "SELECT items_id FROM items WHERE name = ?";
                             String updateStockQuery = "UPDATE items SET quantity_in_stock = ? WHERE name = ?";
-                            String insertOrderQuery = "INSERT INTO orders (item_name, quantity, order_date, customer_name, customer_email, order_notes) VALUES (?, ?, ?, ?, ?, ?)";
+                            String insertOrderQuery = "INSERT INTO orders (items_id, quantity_ordered, order_date, " +
+                                    // I
+                                    // believe that the issue is with the insert order query
+                                    "customer_name, customer_email, order_notes) VALUES (?, ?, ?, ?, ?, ?)";
                             
                             try(PreparedStatement getItemIDStatement = connection.prepareStatement(getItemIDQuery);
                                 PreparedStatement updateStockStatement = connection.prepareStatement(updateStockQuery);
@@ -101,29 +104,60 @@ public class PlaceOrderForm extends JFrame {
                                 
                                 if (itemIDResult.next()){
                                     int itemID = itemIDResult.getInt("items_id");
-                                    
-                                    //update the stock WORKING
-                                    int updatedStock = currentStock - requestedQuantity;
-                                    updateStockStatement.setInt(1, updatedStock);
-                                    updateStockStatement.setString(2, itemName);
-                                    updateStockStatement.executeUpdate();
-                                    InventoryLogger.logInfo("Stock updated Successfully");
-                                    
-                                    // TODO: Insert order needs to be fixed
-                                    // Think I need to add the item ID to the insert order statement
-                                    customerNameField.getText();
-                                    customerEmailField.getText();
-                                    insertOrderStatement.setInt(2, requestedQuantity);
-                                    insertOrderStatement.setString(3, orderDate);
-                                    insertOrderStatement.setString(4, customerName);
-                                    insertOrderStatement.setString(5, customerEmail);
-                                    insertOrderStatement.setString(6, orderNotes);
-                                    insertOrderStatement.executeUpdate();
-                                    InventoryLogger.logInfo("Order added Successfully");
-                                    
-                                    JOptionPane.showInputDialog(PlaceOrderForm.this, "Order Placed Successfully");
-                                } else {
-                                    JOptionPane.showMessageDialog(PlaceOrderForm.this, "Item not found");
+                                    System.out.println("Item ID: " + itemID);
+                                
+                                
+                                // update the stock
+                                System.out.println("Current Stock: " + currentStock);
+                                System.out.println("Requested Quantity: " + requestedQuantity);
+                                int newStock = currentStock - requestedQuantity;
+                                System.out.println("New Stock: " + newStock);
+                                updateStockStatement.setInt(1, newStock);
+                                updateStockStatement.setString(2, itemName);
+                                updateStockStatement.executeUpdate();
+                                InventoryLogger.logInfo("Stock updated Successfully");
+                                
+                                // TODO: Insert order needs to be fixed
+                                // Think I need to add the item ID to the insert order statement
+                                System.out.println("--------------------");
+                                System.out.println("This is the order fields:");
+                                System.out.println("This is the items_id: " + itemID);
+                                itemnameField.getText();
+                                System.out.println("Item Name: " + itemName);
+                                quantityField.getText();
+                                System.out.println("Requested Quantity: " + requestedQuantity);
+                                orderDateField.getText();
+                                System.out.println("Order Date: " + orderDate);
+                                customerNameField.getText();
+                                System.out.println("Customer Name: " + customerName);
+                                customerEmailField.getText();
+                                System.out.println("Customer Email: " + customerEmail);
+                                orderNotesField.getText();
+                                System.out.println("Order Notes: " + orderNotes);
+                                System.out.println("--------------------");
+                                
+                                // insert the order into the orders table
+                                insertOrderStatement.setInt(1, itemID);
+                                    System.out.println(itemID+ " Item ID: " + itemID + " has been added to the orders" +
+                                            " " +
+                                            "table.");
+                                insertOrderStatement.setInt(2, requestedQuantity == 0 ? 1 : requestedQuantity);
+                                    System.out.println(requestedQuantity + " Requested Quantity: " + requestedQuantity +
+                                            " has been added to the orders table.");
+                                insertOrderStatement.setString(3, orderDate);
+                                    System.out.println(orderDate + " Order Date: " + orderDate + " has been added to " +
+                                            "the orders table.");
+                                insertOrderStatement.setString(4, customerName);
+                                    System.out.println(customerName + " Customer Name: " + customerName + " has been " +
+                                            "added to the orders table.");
+                                insertOrderStatement.setString(5, customerEmail);
+                                    System.out.println(customerEmail + " Customer Email: " + customerEmail + " has " +
+                                            "been added to the orders table.");
+                                insertOrderStatement.setString(6, orderNotes);
+                                    System.out.println(orderNotes + " Order Notes: " + orderNotes + " has been added " +
+                                            "to the orders table.");
+                                insertOrderStatement.executeUpdate();
+                                InventoryLogger.logInfo("Order added Successfully");
                                 }
                             } catch (SQLException ex) {
                                 throw new RuntimeException(ex);
@@ -133,8 +167,6 @@ public class PlaceOrderForm extends JFrame {
                 } catch (SQLException ex) {
                     throw new RuntimeException(ex);
                 }
-                
-                JOptionPane.showMessageDialog(null, "Order Placed Successfully");
                 dispose();
             }
         });
