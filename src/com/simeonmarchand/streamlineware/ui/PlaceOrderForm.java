@@ -52,9 +52,7 @@ public class PlaceOrderForm extends JFrame {
         placeOrderButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //TODO: implement the place order functionality
-                // retrieve the input values, update the database, and add the order
-                // display a success/failure message
+               // Place order functionality has been added and is working
                 
                 // retrieve the input values
                 String itemName = itemnameField.getText();
@@ -87,18 +85,16 @@ public class PlaceOrderForm extends JFrame {
                         int currentStock = stockResult.getInt("quantity_in_stock");
                         
                         if (currentStock >= requestedQuantity){
+                            //queries to get the item ID, update the stock, and insert the order
                             String getItemIDQuery = "SELECT items_id FROM items WHERE name = ?";
                             String updateStockQuery = "UPDATE items SET quantity_in_stock = ? WHERE name = ?";
-                            String insertOrderQuery = "INSERT INTO orders (items_id, quantity_ordered, order_date, " +
-                                    // I
-                                    // believe that the issue is with the insert order query
-                                    "customer_name, customer_email, order_notes) VALUES (?, ?, ?, ?, ?, ?)";
+                            String insertOrderQuery = "INSERT INTO orders (items_id, quantity_ordered, order_date, " + "customer_name, customer_email, order_notes) VALUES (?, ?, ?, ?, ?, ?)";
                             
                             try(PreparedStatement getItemIDStatement = connection.prepareStatement(getItemIDQuery);
                                 PreparedStatement updateStockStatement = connection.prepareStatement(updateStockQuery);
                                 PreparedStatement insertOrderStatement = connection.prepareStatement(insertOrderQuery)){
                                 
-                                // get the item ID
+                                // gets the item ID
                                 getItemIDStatement.setString(1, itemName);
                                 ResultSet itemIDResult = getItemIDStatement.executeQuery();
                                 
@@ -107,7 +103,7 @@ public class PlaceOrderForm extends JFrame {
                                     System.out.println("Item ID: " + itemID);
                                 
                                 
-                                // update the stock
+                                // updates the stock
                                 System.out.println("Current Stock: " + currentStock);
                                 System.out.println("Requested Quantity: " + requestedQuantity);
                                 int newStock = currentStock - requestedQuantity;
@@ -117,8 +113,7 @@ public class PlaceOrderForm extends JFrame {
                                 updateStockStatement.executeUpdate();
                                 InventoryLogger.logInfo("Stock updated Successfully");
                                 
-                                // TODO: Insert order needs to be fixed
-                                // Think I need to add the item ID to the insert order statement
+                                // log the order fields
                                 System.out.println("--------------------");
                                 System.out.println("This is the order fields:");
                                 System.out.println("This is the items_id: " + itemID);
@@ -136,7 +131,7 @@ public class PlaceOrderForm extends JFrame {
                                 System.out.println("Order Notes: " + orderNotes);
                                 System.out.println("--------------------");
                                 
-                                // insert the order into the orders table
+                                // inserts the order into the orders table
                                 insertOrderStatement.setInt(1, itemID);
                                 insertOrderStatement.setInt(2, requestedQuantity == 0 ? 1 : requestedQuantity);
                                 insertOrderStatement.setString(3, orderDate);
@@ -146,11 +141,10 @@ public class PlaceOrderForm extends JFrame {
                                 insertOrderStatement.executeUpdate();
                                 InventoryLogger.logInfo("--------------------");
                                 InventoryLogger.logInfo("You're order has been placed successfully");
-                                InventoryLogger.logInfo("Order Details: \n" + "Item Name: " + itemName +
-                                        "\nQuantity: " + quantity + "\nOrder Date: " + orderDate + "\nCustomer " +
-                                        "Name: " + customerName +
-                                        "\nCustomer Email: " + customerEmail + "\nOrder Notes: " + orderNotes);
-                                    InventoryLogger.logInfo("--------------------");
+                                InventoryLogger.logInfo("Order Details: \n" + "Item Name: " + itemName + "\nQuantity: " + quantity + "\nOrder Date: " + orderDate + "\nCustomer " + "Name: " + customerName + "\nCustomer Email: " + customerEmail + "\nOrder Notes: " + orderNotes);
+                                InventoryLogger.logInfo("--------------------");
+                                
+                                //TODO: show confirmation number = order_id
                                 } else {
                                     InventoryLogger.logError("Item ID not found");
                                 }

@@ -144,10 +144,7 @@ public class App {
         orderFormPanel.add(deleteOrdersButton);
 
         placeOrderButton.addActionListener(e -> {
-            //TODO: implement the place order button function to open a new window that has a form that can be filled
-            // out this form will remove the quantity of the item from the database and add it to the orders table
             InventoryLogger.logInfo("Order button clicked");
-            System.out.println("Order button clicked");
             new PlaceOrderForm();
             
         });

@@ -46,7 +46,6 @@ public class OrderDAO {
     }
 
     public void updateItemQuantity(Item item) {
-        //TODO: implement this method to update the item quantity in the database
         int newQuantityInStock = item.getQuantityInStock() - getQuantityOrdered();
         String query = "UPDATE items SET quantity_in_stock = ? WHERE id = ?";
 
