@@ -1,6 +1,6 @@
-Aug 30, 2023 2:31:56 PM com.simeonmarchand.streamlineware.logger.InventoryLogger logInfo
+Aug 30, 2023 2:46:53 PM com.simeonmarchand.streamlineware.logger.InventoryLogger logInfo
 INFO: Order button clicked
-Aug 30, 2023 2:32:14 PM com.simeonmarchand.streamlineware.logger.InventoryLogger logInfo
+Aug 30, 2023 2:47:11 PM com.simeonmarchand.streamlineware.logger.InventoryLogger logInfo
 INFO: This information is being logged
  Item Name: Nike Quantity: 
 1 Order Date: 
@@ -8,7 +8,19 @@ INFO: This information is being logged
 SimeonCustomer Email: 
 srm@gmail.com Order Notes 
 N/A
-Aug 30, 2023 2:32:14 PM com.simeonmarchand.streamlineware.logger.InventoryLogger logInfo
+Aug 30, 2023 2:47:11 PM com.simeonmarchand.streamlineware.logger.InventoryLogger logInfo
 INFO: Stock updated Successfully
-Aug 30, 2023 2:32:14 PM com.simeonmarchand.streamlineware.logger.InventoryLogger logInfo
-INFO: Order added Successfully
+Aug 30, 2023 2:47:11 PM com.simeonmarchand.streamlineware.logger.InventoryLogger logInfo
+INFO: --------------------
+Aug 30, 2023 2:47:11 PM com.simeonmarchand.streamlineware.logger.InventoryLogger logInfo
+INFO: You're order has been placed successfully
+Aug 30, 2023 2:47:11 PM com.simeonmarchand.streamlineware.logger.InventoryLogger logInfo
+INFO: Order Details: 
+Item Name: Nike
+Quantity: 1
+Order Date: 2023-08-30
+Customer Name: Simeon
+Customer Email: srm@gmail.com
+Order Notes N/A
+Aug 30, 2023 2:47:11 PM com.simeonmarchand.streamlineware.logger.InventoryLogger logInfo
+INFO: --------------------

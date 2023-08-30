@@ -138,26 +138,21 @@ public class PlaceOrderForm extends JFrame {
                                 
                                 // insert the order into the orders table
                                 insertOrderStatement.setInt(1, itemID);
-                                    System.out.println(itemID+ " Item ID: " + itemID + " has been added to the orders" +
-                                            " " +
-                                            "table.");
                                 insertOrderStatement.setInt(2, requestedQuantity == 0 ? 1 : requestedQuantity);
-                                    System.out.println(requestedQuantity + " Requested Quantity: " + requestedQuantity +
-                                            " has been added to the orders table.");
                                 insertOrderStatement.setString(3, orderDate);
-                                    System.out.println(orderDate + " Order Date: " + orderDate + " has been added to " +
-                                            "the orders table.");
                                 insertOrderStatement.setString(4, customerName);
-                                    System.out.println(customerName + " Customer Name: " + customerName + " has been " +
-                                            "added to the orders table.");
                                 insertOrderStatement.setString(5, customerEmail);
-                                    System.out.println(customerEmail + " Customer Email: " + customerEmail + " has " +
-                                            "been added to the orders table.");
                                 insertOrderStatement.setString(6, orderNotes);
-                                    System.out.println(orderNotes + " Order Notes: " + orderNotes + " has been added " +
-                                            "to the orders table.");
                                 insertOrderStatement.executeUpdate();
-                                InventoryLogger.logInfo("Order added Successfully");
+                                InventoryLogger.logInfo("--------------------");
+                                InventoryLogger.logInfo("You're order has been placed successfully");
+                                InventoryLogger.logInfo("Order Details: \n" + "Item Name: " + itemName +
+                                        "\nQuantity: " + quantity + "\nOrder Date: " + orderDate + "\nCustomer " +
+                                        "Name: " + customerName +
+                                        "\nCustomer Email: " + customerEmail + "\nOrder Notes: " + orderNotes);
+                                    InventoryLogger.logInfo("--------------------");
+                                } else {
+                                    InventoryLogger.logError("Item ID not found");
                                 }
                             } catch (SQLException ex) {
                                 throw new RuntimeException(ex);
