@@ -77,7 +77,7 @@ public class App {
         addTabPanel.add(new JLabel(""));
         addTabPanel.add(searchButton);
 
-        JButton deleteItem = new JButton("Delete All Items");
+        JButton deleteItem = new JButton("Delete All Orders/Items");
         addTabPanel.add(new JLabel(""));
         addTabPanel.add(deleteItem);
 
@@ -87,11 +87,15 @@ public class App {
 
          */
         deleteItem.addActionListener(e -> {
-            //Bug: Not able to delete all item due to the foreign key constraint
+            String deleteOrdersQuery = "DELETE FROM orders";
             String deleteItemsQuery = "DELETE FROM items";
             System.out.println(deleteItemsQuery);
             try(Connection connection = DatabaseConnection.getConnection()){
-                
+                try(PreparedStatement statement = connection.prepareStatement(deleteOrdersQuery)){
+                    statement.executeUpdate();
+                    JOptionPane.showMessageDialog(null, "All orders deleted");
+                    InventoryLogger.logInfo("All orders deleted");
+                }
                 try(PreparedStatement statement = connection.prepareStatement(deleteItemsQuery)){
                     statement.executeUpdate();
                     JOptionPane.showMessageDialog(null, "All items deleted");
@@ -155,6 +159,7 @@ public class App {
         //TODO: implement the view orders button function to open a new window that displays all the orders in the database
         // would be nice to also have the ability to edit an order.. we will see. one step at a time.
         viewOrdersButton.addActionListener(e -> {
+            // We will work on this next week
             InventoryLogger.logInfo("View orders button clicked");
             System.out.println("View orders button clicked");
             new ViewOrderForm();
@@ -162,6 +167,7 @@ public class App {
         
         //TODO: implement the delete orders button function to delete all the orders in the database
         deleteOrdersButton.addActionListener(e -> {
+            // We will work on this next week as well
             InventoryLogger.logInfo("Delete orders button clicked");
             System.out.println("Delete orders button clicked");
         });
