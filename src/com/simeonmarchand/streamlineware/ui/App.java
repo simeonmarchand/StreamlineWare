@@ -87,15 +87,18 @@ public class App {
 
          */
         deleteItem.addActionListener(e -> {
-            String query = "DELETE FROM items";
+            //Bug: Not able to delete all item due to the foreign key constraint
+            String deleteItemsQuery = "DELETE FROM items";
+            System.out.println(deleteItemsQuery);
             try(Connection connection = DatabaseConnection.getConnection()){
-                try(PreparedStatement statement = connection.prepareStatement(query)){
+                
+                try(PreparedStatement statement = connection.prepareStatement(deleteItemsQuery)){
                     statement.executeUpdate();
                     JOptionPane.showMessageDialog(null, "All items deleted");
                     InventoryLogger.logInfo("All items deleted");
                 }
-            } catch (SQLException exception) {
-                throw new RuntimeException(exception);
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex);
             }
         });
 
@@ -154,6 +157,7 @@ public class App {
         viewOrdersButton.addActionListener(e -> {
             InventoryLogger.logInfo("View orders button clicked");
             System.out.println("View orders button clicked");
+            new ViewOrderForm();
         });
         
         //TODO: implement the delete orders button function to delete all the orders in the database
