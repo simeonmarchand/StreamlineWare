@@ -3,7 +3,7 @@ StreamlineWare is an inventory management system that interacts with a local MyS
 
 ### Features
 - [X] Add items to DB using GUI
-- [ ] Remove items from DB using GUI
+- [x] Remove items from DB using GUI
 - [ ] Edit items from DB using GUI
-- [ ] Search items from DB using GUI
+- [x] Search items from DB using GUI
 - [ ] Generate reports (features TBD)
